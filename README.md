@@ -1,6 +1,6 @@
-# Example app with styled-components
+# Rede Social - Alurakut (Imersão Alura)
 
-Projeto criado na Imersão [Alura](https://www.alura.com.br/), projeto nomeado(pela [Alura](https://www.alura.com.br/)) de Alurakut, recriando a rede social Orkut.
+Projeto criado na Imersão [Alura](https://www.alura.com.br/), projeto nomeado (pela [Alura](https://www.alura.com.br/)) de Alurakut, recriando a rede social Orkut.
 
 Linguagens utilizadas para criação é [React](https://pt-br.reactjs.org/) e [Next](https://nextjs.org/).
 
