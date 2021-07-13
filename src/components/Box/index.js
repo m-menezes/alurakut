@@ -14,7 +14,7 @@ const Box = styled.div`
   .title {
     font-size: 32px;
     font-weight: 400;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   .subTitle {
     font-size: 18px;
@@ -47,12 +47,37 @@ const Box = styled.div`
       opacity: 1;
     }
   }
-  button {
-    border: 0;
-    padding: 8px 12px;
-    color: #FFFFFF;
-    border-radius: 10000px;
-    background-color: #6F92BB;
+  .formInsertComunnity{
+    *{
+      border-radius: 8px;
+    }
+    button {
+      border: 0;
+      padding: 9px 12px;
+      color: #FFFFFF;
+      margin: 0 16px 16px 0;
+      background-color: #6F92BB;
+    }
+  }
+
+  // My CSS
+  .description{
+    text-transform: lowercase;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 15px;
+    color: #999;
+  }
+  .sorte{
+    font-family: Verdana;
+    font-style: normal;
+    font-size: 12px;
+    line-height: 15px;
+    color: #999999;
+    >b{
+      font-weight: bold;
+    }
   }
 `; 
 export default Box
