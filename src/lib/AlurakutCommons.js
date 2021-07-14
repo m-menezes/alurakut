@@ -142,12 +142,15 @@ AlurakutMenu.Wrapper = styled.header`
           top: 0;
           bottom: 0;
         }
+        &:hover{
+          background: rgba(0,0,0,.1);
+        }
         
       }
       &.mainMenu{
         a{
           &:first-child{
-            background: #e9f3ff;
+            background: rgba(0,0,0,.1);
           }
         }
       }
