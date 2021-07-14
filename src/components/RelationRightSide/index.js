@@ -14,7 +14,6 @@ function RelationRightSide(props) {
 					return (
 						<li key={itemAtual.id}>
 							<a href={itemAtual.html_url ? itemAtual.html_url : itemAtual.url} >
-								{console.log(itemAtual)}
 								{itemAtual.login
 								 ? <img src={`https://github.com/${itemAtual.login}.png`} />
 								 : <img src={itemAtual.image} />

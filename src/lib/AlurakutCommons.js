@@ -24,10 +24,12 @@ export function AlurakutMenu({ githubUser }) {
   return (
     <AlurakutMenu.Wrapper isMenuOpen={isMenuOpen}>
       <div className="container">
-        <AlurakutMenu.Logo src={`${BASE_URL}/logo.svg`} />
+        <a href="\">
+          <AlurakutMenu.Logo src={`${BASE_URL}/logo.svg`} />
+        </a>
 
         <nav className="mainMenu" style={{ flex: 1 }}>
-          {[{ name: 'Inicio', slug: '/'}, {name: 'Amigos', slug: '/amigos'}, {name: 'Comunidades', slug: '/comunidades'}].map((menuItem) => (
+          {[{ name: 'Inicio', slug: '/' }, { name: 'Amigos', slug: '/amigos' }, { name: 'Comunidades', slug: '/comunidades' }].map((menuItem) => (
             <Link key={`key__${menuItem.name.toLocaleLowerCase()}`} href={`${menuItem.slug.toLocaleLowerCase()}`}>
               {menuItem.name}
             </Link>
@@ -56,6 +58,8 @@ AlurakutMenu.Wrapper = styled.header`
   width: 100%;
   background-color: #ffffff;
   border-bottom: 1px solid #0b4284a6;
+  overflow: hidden;
+
   .d-flex{
     display: flex;
   }
@@ -105,6 +109,7 @@ AlurakutMenu.Wrapper = styled.header`
     justify-content: space-between;
     position: relative;
     z-index: 101;
+    padding: 0 16px;
     @media(min-width: 860px) {
       justify-content: flex-start;
     }
@@ -176,10 +181,15 @@ AlurakutMenu.Wrapper = styled.header`
 `;
 AlurakutMenu.Logo = styled.img`
   background-color: #ffffff;
-  padding: 11px 50px;
+  padding: 11px 35px 11px 25px;
   border-radius: 1000px;
   height: 48px;
   filter: hue-rotate(270deg);
+  :hover{
+    transform: scale(1.1);
+    filter: hue-rotate(0deg);
+  }
+  transition: 1s;
 `;
 
 function AlurakutMenuProfileSidebar({ githubUser }) {
@@ -210,31 +220,31 @@ export function AlurakutProfileSidebarMenuDefault() {
       <nav>
         <a href="/">
           <img src={`${BASE_URL}/icons/user.svg`} />
-            Perfil
-          </a>
+          Perfil
+        </a>
         <a href="/">
           <img src={`${BASE_URL}/icons/book.svg`} />
-            Recados
-          </a>
+          Recados
+        </a>
         <a href="/">
           <img src={`${BASE_URL}/icons/camera.svg`} />
-            Fotos
-          </a>
+          Fotos
+        </a>
         <a href="/">
           <img src={`${BASE_URL}/icons/sun.svg`} />
-            Depoimentos
-          </a>
+          Depoimentos
+        </a>
       </nav>
       <hr />
       <nav>
         <a href="/">
           <img src={`${BASE_URL}/icons/plus.svg`} />
-            GitHub Trends
-          </a>
+          GitHub Trends
+        </a>
         <a href="/logout">
           <img src={`${BASE_URL}//icons/logout.svg`} />
-            Sair
-          </a>
+          Sair
+        </a>
       </nav>
     </AlurakutProfileSidebarMenuDefault.Wrapper>
   )
@@ -280,9 +290,9 @@ export function OrkutNostalgicIconSet(props) {
         </li>
       ))}
       {[
-        { name: 'Confiável', slug: 'confiavel', icon: 'smile', total: 3},
-        { name: 'Legal', slug: 'legal', icon: 'cool', total: 1},
-        { name: 'Sexy', slug: 'sexy', icon: 'heart', total: 2},
+        { name: 'Confiável', slug: 'confiavel', icon: 'smile', total: 3 },
+        { name: 'Legal', slug: 'legal', icon: 'cool', total: 1 },
+        { name: 'Sexy', slug: 'sexy', icon: 'heart', total: 2 },
       ].map(({ name, slug, icon, total }) => {
         return (
           <li key={`orkut__icon_set__${slug}`}>
