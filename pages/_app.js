@@ -11,6 +11,8 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: sans-serif;
     background-color: #d8d8d8;
+    background-image: url("https://www.alura.com.br/assets/img/home/luz-roxa-luz-topo-mask-grande.1617662393.png");
+    background-size: cover;
   }
 
   #__next {

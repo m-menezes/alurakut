@@ -13,7 +13,7 @@ const MainGrid = styled.main`
     }
   }
   @media(min-width: 860px) {
-    max-width: 1110px;
+    max-width: 1300px;
     display: grid;
     grid-template-areas: 
       "profileArea welcomeArea profileRelationsArea";

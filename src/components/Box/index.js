@@ -56,7 +56,7 @@ const Box = styled.div`
       padding: 9px 12px;
       color: #FFFFFF;
       margin: 0 16px 16px 0;
-      background-color: #6F92BB;
+      background-color: #0b4284;
     }
   }
 

@@ -26,7 +26,7 @@ export function AlurakutMenu({ githubUser }) {
       <div className="container">
         <AlurakutMenu.Logo src={`${BASE_URL}/logo.svg`} />
 
-        <nav style={{ flex: 1 }}>
+        <nav className="mainMenu" style={{ flex: 1 }}>
           {[{ name: 'Inicio', slug: '/'}, {name: 'Amigos', slug: '/amigos'}, {name: 'Comunidades', slug: '/comunidades'}].map((menuItem) => (
             <Link key={`key__${menuItem.name.toLocaleLowerCase()}`} href={`${menuItem.slug.toLocaleLowerCase()}`}>
               {menuItem.name}
@@ -38,7 +38,7 @@ export function AlurakutMenu({ githubUser }) {
           <a href={`/logout`}>
             Sair
           </a>
-          <div>
+          <div className="d-flex">
             <input placeholder="Pesquisar no Orkut" />
           </div>
         </nav>
@@ -54,8 +54,11 @@ export function AlurakutMenu({ githubUser }) {
 }
 AlurakutMenu.Wrapper = styled.header`
   width: 100%;
-  background-color: #717171;
-
+  background-color: #ffffff;
+  border-bottom: 1px solid #0b4284a6;
+  .d-flex{
+    display: flex;
+  }
   .alurakutMenuProfileSidebar {
     background: white;
     position: fixed;
@@ -81,7 +84,7 @@ AlurakutMenu.Wrapper = styled.header`
     }
     .boxLink {
       font-size: 18px;
-      color: #2E7BB4;
+      color: #0b4284;
       -webkit-text-decoration: none;
       text-decoration: none;
       font-weight: 800;
@@ -96,9 +99,7 @@ AlurakutMenu.Wrapper = styled.header`
   }
 
   .container {
-    background-color: #717171;
-    padding: 7px 16px;
-    max-width: 1110px;
+    max-width: 1300px;
     margin: auto;
     display: flex;
     justify-content: space-between;
@@ -125,13 +126,13 @@ AlurakutMenu.Wrapper = styled.header`
       }
       a {
         font-size: 12px;
-        color: white;
-        padding: 10px 16px;
+        color: #000;
+        padding: 16px;
         position: relative;
         text-decoration: none;
         &:not(:first-child):after {
           content: " ";
-          background-color: #fff;
+          background-color: #0b4284a6;
           display: block;
           position: absolute;
           width: 1px;
@@ -141,12 +142,22 @@ AlurakutMenu.Wrapper = styled.header`
           top: 0;
           bottom: 0;
         }
+        
+      }
+      &.mainMenu{
+        a{
+          &:first-child{
+            background: #e9f3ff;
+          }
+        }
       }
     }
+    
     input {
       color: #ffffff;
-      background: #444242;
+      background: #0b4284;
       padding: 10px 42px;
+      margin: auto;
       border: 0;
       background-image: url(${`${BASE_URL}/icons/search.svg`});
       background-position: 15px center;
@@ -162,9 +173,10 @@ AlurakutMenu.Wrapper = styled.header`
 `;
 AlurakutMenu.Logo = styled.img`
   background-color: #ffffff;
-  padding: 9px 14px;
+  padding: 11px 50px;
   border-radius: 1000px;
-  height: 34px;
+  height: 48px;
+  filter: hue-rotate(270deg);
 `;
 
 function AlurakutMenuProfileSidebar({ githubUser }) {
@@ -342,7 +354,7 @@ const AlurakutLoginScreen = css`
 
   .loginScreen {
     padding: 16px;
-    max-width: 1110px;
+    max-width: 1300px;
     display: grid;
     --gap: 12px;
     --gutter: 16px;
