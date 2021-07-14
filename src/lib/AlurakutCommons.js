@@ -265,9 +265,9 @@ export function OrkutNostalgicIconSet(props) {
         </li>
       ))}
       {[
-        { name: 'Confiável', slug: 'confiavel', icon: 'smile', total: 1},
-        { name: 'Legal', slug: 'legal', icon: 'cool', total: 2},
-        { name: 'Sexy', slug: 'sexy', icon: 'heart', total: 3},
+        { name: 'Confiável', slug: 'confiavel', icon: 'smile', total: 3},
+        { name: 'Legal', slug: 'legal', icon: 'cool', total: 1},
+        { name: 'Sexy', slug: 'sexy', icon: 'heart', total: 2},
       ].map(({ name, slug, icon, total }) => {
         return (
           <li key={`orkut__icon_set__${slug}`}>
@@ -287,7 +287,7 @@ export function OrkutNostalgicIconSet(props) {
   )
 }
 OrkutNostalgicIconSet.List = styled.ul`
-  margin-top: 32px;
+  margin-top: 20px;
   list-style: none;
   display: flex;
   justify-content: space-between;

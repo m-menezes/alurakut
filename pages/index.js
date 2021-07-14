@@ -1,58 +1,32 @@
 import React from 'react';
-import { AlurakutMenu, AlurakutProfileSidebarMenuDefault, OrkutNostalgicIconSet } from '../src/lib/AlurakutCommons';
-import { ProfileRelationsBoxWrapper } from '../src/components/ProfileRelation';
+import { AlurakutMenu, OrkutNostalgicIconSet } from '../src/lib/AlurakutCommons';
 import Box from '../src/components/Box'
 import MainGrid from '../src/components/MainGrid'
-import followers  from '../src/lib/followers.json';
+import ProfileSidebar from '../src/components/ProfileSidebar';
+import RelationRightSide from '../src/components/RelationRightSide';
+import SortedoDia from '../src/components/SortedoDia';
 
-function ProfileSidebar(propriedades) {
-  return (
-    <Box as="aside">
-      <img src={`https://github.com/${propriedades.githubUser}.png`} style={{ borderRadius: '8px' }} />
-      <hr/>
-      <a className="boxLink" href={`https://github.com/${propriedades.githubUser}`}>
-        {propriedades.githubUser}
-      </a>
-	  <div className="description">
-			<p>Masculino,</p>
-			<p>Solteiro(a)</p>
-			<p>Brasil</p>
-	  </div>
-      <hr/>
-      <AlurakutProfileSidebarMenuDefault/>
-    </Box>
-  )
-}
-
-function RightSide(props){
-	return (
-		<ProfileRelationsBoxWrapper>
-			<h2 className="smallTitle">{props.title} ({props.items.length})</h2>
-			<ul>
-				{props.items.slice(0, 6).map((itemAtual) => {
-					return (
-						<li key={itemAtual.id}>
-							<a href={itemAtual.html_url ? itemAtual.html_url : itemAtual.url} >
-							<img src={itemAtual.image ? itemAtual.image : `https://github.com/${itemAtual.login}.png`} />
-							<span>{itemAtual.name ? itemAtual.name : itemAtual.login}</span>
-							</a>
-						</li>
-						)
-					})
-				}
-			</ul>
-		</ProfileRelationsBoxWrapper>
-	)
-}
 
 export default function Home() {
+	const usuarioAleatorio = 'm-menezes';
+	const [ followers, setFollowers ] = React.useState([]);
 	const [ comunidades, setComunidades ] = React.useState([{
 		id: new Date().toISOString,
 		url: 'https://www.alura.com.br/',
 		name: 'Alura',
 		image: 'https://www.nerdstickers.com.br/wp-content/uploads/2020/11/Adesivo-Alura-Nerd-Stickers.png'
 	}]);
-	const usuarioAleatorio = 'm-menezes';
+
+	React.useEffect( () => {
+		fetch(`https://api.github.com/users/${usuarioAleatorio}/followers`)
+		.then((response)=>{
+			return response.json();
+		})
+		.then((data) => {
+			setFollowers(data);
+		})
+	}, []);
+
 	return (
 		<>
 		<AlurakutMenu githubUser={usuarioAleatorio}/>
@@ -63,7 +37,8 @@ export default function Home() {
 			<div className="welcomeArea" style={{ gridArea: 'welcomeArea' }}>
 				<Box>
 					<h1 className="title">Bem vindo, {usuarioAleatorio}</h1>
-					<p className="sorte"><b>Sorte do dia:</b> Lucky day</p>
+					<SortedoDia/>
+					<hr/>
 					<OrkutNostalgicIconSet />
 				</Box>
 				<Box>
@@ -98,8 +73,8 @@ export default function Home() {
 				</Box>
 			</div>
 			<div className="profileRelationsArea" style={{ gridArea: 'profileRelationsArea' }}>
-				<RightSide title={"Comunidades"} items={comunidades}/>
-				<RightSide title={"Amigos"} items={followers}/>
+				<RelationRightSide title={"Comunidades"} items={comunidades}/>
+				<RelationRightSide title={"Amigos"} items={followers}/>
 			</div>
 		</MainGrid>
 		</>

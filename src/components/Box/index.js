@@ -79,5 +79,11 @@ const Box = styled.div`
       font-weight: bold;
     }
   }
+  .autor{
+    color: #999999;
+    padding: 8px 0 0;
+    text-align: right;
+    font-size: 11px;
+  }
 `; 
 export default Box
