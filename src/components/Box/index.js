@@ -47,7 +47,7 @@ const Box = styled.div`
       opacity: 1;
     }
   }
-  .formInsertComunnity{
+  .formInsertCommunity{
     *{
       border-radius: 8px;
     }
@@ -57,6 +57,17 @@ const Box = styled.div`
       color: #FFFFFF;
       margin: 0 16px 16px 0;
       background-color: #0b4284;
+    }
+    .inputs{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 10px;
+      input{
+        margin: 0;
+        &:last-child{
+          grid-column: 1/3;
+        }
+      }
     }
   }
 

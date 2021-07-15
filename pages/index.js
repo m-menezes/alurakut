@@ -11,18 +11,7 @@ import Repositorios from '../src/components/Repositorios';
 export default function Home() {
 	const usuarioAleatorio = 'm-menezes';
 	const [followers, setFollowers] = React.useState([]);
-	const [comunidades, setComunidades] = React.useState([{
-		id: new Date().toISOString,
-		url: 'https://www.alura.com.br/',
-		name: 'Alura',
-		image: 'https://www.nerdstickers.com.br/wp-content/uploads/2020/11/Adesivo-Alura-Nerd-Stickers.png'
-	}, {
-		id: new Date().toISOString,
-		url: 'https://github.com/',
-		name: 'Github',
-		image: 'https://enotas.com.br/blog/wp-content/uploads/2021/02/GitHub-150x150.jpg'
-	}
-	]);
+	const [comunidades, setComunidades] = React.useState([]);
 
 	React.useEffect(() => {
 		fetch(`https://api.github.com/users/${usuarioAleatorio}/followers`)
@@ -31,6 +20,29 @@ export default function Home() {
 			})
 			.then((data) => {
 				setFollowers(data);
+			})
+
+		fetch('https://graphql.datocms.com/', {
+			method: 'POST',
+			headers: {
+				'Authorization': '1be46233a504021b8c45433e60ebd4',
+				'Content-type': 'application/json',
+				'Accept': 'application/json'
+			},
+			body: JSON.stringify({
+				"query": `query {
+					allCommunities {
+					  id
+					  name
+					  url
+					  image
+				    }
+				}`
+			})
+		})
+			.then((response) => response.json())
+			.then((resposta) => {
+				setComunidades(resposta.data.allCommunities)
 			})
 	}, []);
 
@@ -50,32 +62,51 @@ export default function Home() {
 					</Box>
 					<Box>
 						<h2 className="smallTitle">O que você deseja fazer?</h2>
-						<form className="formInsertComunnity" onSubmit={
+						<form className="formInsertCommunity" onSubmit={
 							function handleComunidades(e) {
 								e.preventDefault();
 								const dados = new FormData(e.target);
 								const comunidade = {
-									id: new Date().toISOString(),
-									name: dados.get('title'),
-									url: dados.get('title'),
-									image: dados.get('image')
+									name: dados.get('name'),
+									url: dados.get('url'),
+									image: dados.get('image'),
+									creatorslug: usuarioAleatorio
 								};
-								setComunidades([...comunidades, comunidade]);
+
+								fetch('/api/comunidades', {
+									method: 'POST',
+									headers: {
+										'Content-Type': 'application/json',
+									},
+									body: JSON.stringify(comunidade)
+								}).then(async (response) => {
+									const dados = await response.json();
+									setComunidades([...comunidades, dados.registro]);
+								})
+								console.log(e)
 							}}>
 							<button>Criar comunidade</button>
 							<button disabled>Depoimentos</button>
-							<input
-								type="text"
-								name="title"
-								placeholder="Qual vai ser o nome da sua comunidade?"
-								aria-label="Qual vai ser o nome da sua comunidade?"
-							/>
-							<input
-								type="text"
-								name="image"
-								placeholder="Imagem da comunidade"
-								aria-label="Imagem da comunidade"
-							/>
+							<div className="inputs">
+								<input
+									type="text"
+									name="name"
+									placeholder="Qual vai ser o nome da sua comunidade?"
+									aria-label="Qual vai ser o nome da sua comunidade?"
+								/>
+								<input
+									type="text"
+									name="image"
+									placeholder="Imagem da comunidade"
+									aria-label="Imagem da comunidade"
+								/>
+								<input
+									type="text"
+									name="url"
+									placeholder="Url da comunidade"
+									aria-label="Url da comunidade"
+								/>
+							</div>
 						</form>
 					</Box>
 				</div>
