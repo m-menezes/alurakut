@@ -26,6 +26,13 @@ const GlobalStyle = createGlobalStyle`
     height: auto;
     display: block;
   }
+  .help-text{
+    margin-right: auto;
+    font-size: 12px;
+    color: gray;
+    margin-top: 24px;
+    margin-bottom: 5px;
+  }
 
   ${AlurakutStyles}
 `

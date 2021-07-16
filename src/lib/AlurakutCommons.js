@@ -1,4 +1,5 @@
 import React from 'react';
+import nookies from 'nookies';
 import styled, { css } from 'styled-components';
 import NextLink from 'next/link';
 
@@ -37,7 +38,9 @@ export function AlurakutMenu({ githubUser }) {
         </nav>
 
         <nav>
-          <a href={`/logout`}>
+          <a href={`/login`} onClick={(e) => {
+            nookies.destroy(null, 'USER');
+          }}>
             Sair
           </a>
           <div className="d-flex">
@@ -411,6 +414,16 @@ const AlurakutLoginScreen = css`
       img {
         max-height: 45px;
         margin-bottom: 36px;
+        animation: fadecolor 3s infinite;
+      }
+    }
+    @keyframes fadecolor {
+      from {
+        filter: hue-rotate(0deg);
+      }
+    
+      to {
+        filter: hue-rotate(360deg);
       }
     }
     .formArea {
@@ -453,7 +466,6 @@ const AlurakutLoginScreen = css`
           padding: 12px;
           background-color: var(--backgroundTertiary);
           border-radius: var(--commonRadius);
-          margin-top: 24px;
           margin-bottom: 16px;
         }
         button {

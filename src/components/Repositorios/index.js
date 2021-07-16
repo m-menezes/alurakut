@@ -5,7 +5,7 @@ function Repositorios(props) {
     const [repositorios, setRepositorios] = React.useState([]);
 
     React.useEffect(() => {
-        fetch(`https://api.github.com/users/${props.usuarioAleatorio}/repos`)
+        fetch(`https://api.github.com/users/${props.usuario}/repos`)
             .then((response) => {
                 return response.json();
             })

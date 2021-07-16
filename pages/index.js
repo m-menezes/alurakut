@@ -1,4 +1,6 @@
 import React from 'react';
+import nookies from 'nookies';
+import jwt from 'jsonwebtoken';
 import { AlurakutMenu, OrkutNostalgicIconSet } from '../src/lib/AlurakutCommons';
 import Box from '../src/components/Box'
 import MainGrid from '../src/components/MainGrid'
@@ -6,15 +8,16 @@ import ProfileSidebar from '../src/components/ProfileSidebar';
 import RelationRightSide from '../src/components/RelationRightSide';
 import SortedoDia from '../src/components/SortedoDia';
 import Repositorios from '../src/components/Repositorios';
+import { isEmpty } from 'lodash';
 
 
-export default function Home() {
-	const usuarioAleatorio = 'm-menezes';
+export default function Home(props) {
+	const usuario = props.githubUser;
 	const [followers, setFollowers] = React.useState([]);
 	const [comunidades, setComunidades] = React.useState([]);
 
 	React.useEffect(() => {
-		fetch(`https://api.github.com/users/${usuarioAleatorio}/followers`)
+		fetch(`https://api.github.com/users/${usuario}/followers`)
 			.then((response) => {
 				return response.json();
 			})
@@ -48,14 +51,14 @@ export default function Home() {
 
 	return (
 		<>
-			<AlurakutMenu githubUser={usuarioAleatorio} />
+			<AlurakutMenu githubUser={usuario} />
 			<MainGrid>
 				<div className="profileArea" style={{ gridArea: 'profileArea' }}>
-					<ProfileSidebar githubUser={usuarioAleatorio} />
+					<ProfileSidebar githubUser={usuario} />
 				</div>
 				<div className="welcomeArea" style={{ gridArea: 'welcomeArea' }}>
 					<Box>
-						<h1 className="title">Bem vindo, {usuarioAleatorio}</h1>
+						<h1 className="title">Bem vindo, {props.name}</h1>
 						<SortedoDia />
 						<hr />
 						<OrkutNostalgicIconSet />
@@ -70,7 +73,7 @@ export default function Home() {
 									name: dados.get('name'),
 									url: dados.get('url'),
 									image: dados.get('image'),
-									creatorslug: usuarioAleatorio
+									creatorslug: usuario
 								};
 
 								fetch('/api/comunidades', {
@@ -111,11 +114,39 @@ export default function Home() {
 					</Box>
 				</div>
 				<div className="profileRelationsArea" style={{ gridArea: 'profileRelationsArea' }}>
-					<Repositorios usuarioAleatorio={usuarioAleatorio} />
+					<Repositorios usuario={usuario} />
 					<RelationRightSide title={"Comunidades"} items={comunidades} />
 					<RelationRightSide title={"Amigos"} items={followers} />
 				</div>
 			</MainGrid>
 		</>
 	)
+}
+
+export async function getServerSideProps(context) {
+	const cookies = nookies.get(context);
+	if(!isEmpty(cookies)){
+		const USER = JSON.parse(cookies.USER);
+		if (!USER.login) {
+			return {
+				redirect: {
+					destination: '/login',
+					permanent: false,
+				}
+			}
+		}
+		return {
+			props: {
+				githubUser: USER.login,
+				name: USER.name,
+			},
+		}
+	} else {
+		return {
+			redirect: {
+				destination: '/login',
+				permanent: false,
+			}
+		}
+	}
 }
