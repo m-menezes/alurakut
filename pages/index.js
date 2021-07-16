@@ -15,6 +15,7 @@ export default function Home(props) {
 	const usuario = props.githubUser;
 	const [followers, setFollowers] = React.useState([]);
 	const [comunidades, setComunidades] = React.useState([]);
+	const [nComunidades, setNComunidades] = React.useState([0]);
 
 	React.useEffect(() => {
 		fetch(`https://api.github.com/users/${usuario}/followers`)
@@ -34,19 +35,23 @@ export default function Home(props) {
 			},
 			body: JSON.stringify({
 				"query": `query {
-					allCommunities {
+					allCommunities (first: 6){
 					  id
 					  name
 					  url
 					  image
 				    }
+					_allCommunitiesMeta{
+						count
+					}
 				}`
 			})
 		})
-			.then((response) => response.json())
-			.then((resposta) => {
-				setComunidades(resposta.data.allCommunities)
-			})
+		.then((response) => response.json())
+		.then((resposta) => {
+			setComunidades(resposta.data.allCommunities)
+			setNComunidades(resposta.data._allCommunitiesMeta.count)
+		})
 	}, []);
 
 	return (
@@ -94,18 +99,21 @@ export default function Home(props) {
 								<input
 									type="text"
 									name="name"
+									required
 									placeholder="Qual vai ser o nome da sua comunidade?"
 									aria-label="Qual vai ser o nome da sua comunidade?"
 								/>
 								<input
 									type="text"
 									name="image"
+									required
 									placeholder="Imagem da comunidade"
 									aria-label="Imagem da comunidade"
 								/>
 								<input
 									type="text"
 									name="url"
+									required
 									placeholder="Url da comunidade"
 									aria-label="Url da comunidade"
 								/>
@@ -115,7 +123,7 @@ export default function Home(props) {
 				</div>
 				<div className="profileRelationsArea" style={{ gridArea: 'profileRelationsArea' }}>
 					<Repositorios usuario={usuario} public_repos={props.public_repos} />
-					<RelationRightSide title={"Comunidades"} items={comunidades} />
+					<RelationRightSide title={"Comunidades"} items={comunidades} count={nComunidades}/>
 					<RelationRightSide title={"Amigos"} items={followers} count={props.nFollowers}/>
 				</div>
 			</MainGrid>
