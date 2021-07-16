@@ -114,9 +114,9 @@ export default function Home(props) {
 					</Box>
 				</div>
 				<div className="profileRelationsArea" style={{ gridArea: 'profileRelationsArea' }}>
-					<Repositorios usuario={usuario} />
+					<Repositorios usuario={usuario} public_repos={props.public_repos} />
 					<RelationRightSide title={"Comunidades"} items={comunidades} />
-					<RelationRightSide title={"Amigos"} items={followers} nFollowers={props.nFollowers}/>
+					<RelationRightSide title={"Amigos"} items={followers} count={props.nFollowers}/>
 				</div>
 			</MainGrid>
 		</>
@@ -127,6 +127,7 @@ export async function getServerSideProps(context) {
 	const cookies = nookies.get(context);
 	if(!isEmpty(cookies)){
 		const USER = JSON.parse(cookies.USER);
+		console.log(USER);
 		if (!USER.login) {
 			return {
 				redirect: {
@@ -139,7 +140,8 @@ export async function getServerSideProps(context) {
 			props: {
 				githubUser: USER.login,
 				name: USER.name,
-				nFollowers: USER.followers
+				nFollowers: USER.followers,
+				public_repos: USER.public_repos
 			},
 		}
 	} else {

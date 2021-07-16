@@ -15,7 +15,7 @@ function Repositorios(props) {
     }, []);
     return (
         <>
-        <RelationRightSide title={"Repositórios"} items={repositorios} />
+        <RelationRightSide title={"Repositórios"} items={repositorios} count={props.public_repos}/>
         </>
     )
 }

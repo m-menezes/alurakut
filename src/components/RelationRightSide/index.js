@@ -3,7 +3,7 @@ import { ProfileRelationsBoxWrapper } from '../ProfileRelation';
 function RelationRightSide(props) {
 	return (
 		<ProfileRelationsBoxWrapper>
-			<h2 className="smallTitle">{props.title} ({ props.nFollowers ? props.nFollowers : props.items.length })</h2>
+			<h2 className="smallTitle">{props.title} ({ props.count ? props.count : props.items.length })</h2>
 			<ul>
 				{props.items.slice(0, 6).map((itemAtual) => {
 					{
