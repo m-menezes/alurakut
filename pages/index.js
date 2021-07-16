@@ -116,7 +116,7 @@ export default function Home(props) {
 				<div className="profileRelationsArea" style={{ gridArea: 'profileRelationsArea' }}>
 					<Repositorios usuario={usuario} />
 					<RelationRightSide title={"Comunidades"} items={comunidades} />
-					<RelationRightSide title={"Amigos"} items={followers} />
+					<RelationRightSide title={"Amigos"} items={followers} nFollowers={props.nFollowers}/>
 				</div>
 			</MainGrid>
 		</>
@@ -139,6 +139,7 @@ export async function getServerSideProps(context) {
 			props: {
 				githubUser: USER.login,
 				name: USER.name,
+				nFollowers: USER.followers
 			},
 		}
 	} else {
