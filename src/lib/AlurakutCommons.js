@@ -480,10 +480,11 @@ const AlurakutLoginScreen = css`
       }
     }
     .footerArea {
-      grid-area: footerArea;
-      background-color: var(--backgroundQuarternary);
-      border-radius: var(--commonRadius);
+      width: 100%;
       padding: 8px;
+      left: 0;
+      bottom: 0;
+      position: absolute;
       p {
         font-size: 12px;
         text-align: center;

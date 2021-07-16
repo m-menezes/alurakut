@@ -91,10 +91,10 @@ export default function Home(props) {
 									const dados = await response.json();
 									setComunidades([...comunidades, dados.registro]);
 								})
-								console.log(e)
 							}}>
 							<button>Criar comunidade</button>
 							<button disabled>Depoimentos</button>
+							<button disabled>Scrap</button>
 							<div className="inputs">
 								<input
 									type="text"
@@ -135,7 +135,6 @@ export async function getServerSideProps(context) {
 	const cookies = nookies.get(context);
 	if(!isEmpty(cookies)){
 		const USER = JSON.parse(cookies.USER);
-		console.log(USER);
 		if (!USER.login) {
 			return {
 				redirect: {
