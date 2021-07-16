@@ -480,6 +480,7 @@ const AlurakutLoginScreen = css`
       }
     }
     .footerArea {
+      background-color: var(--backgroundQuarternary);
       width: 100%;
       padding: 8px;
       left: 0;
