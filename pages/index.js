@@ -89,7 +89,7 @@ export default function Home(props) {
 									body: JSON.stringify(comunidade)
 								}).then(async (response) => {
 									const dados = await response.json();
-									setComunidades([...comunidades, dados.registro]);
+									setComunidades([dados.registro, ...comunidades]);
 								})
 							}}>
 							<button>Criar comunidade</button>
