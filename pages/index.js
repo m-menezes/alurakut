@@ -47,11 +47,11 @@ export default function Home(props) {
 				}`
 			})
 		})
-		.then((response) => response.json())
-		.then((resposta) => {
-			setComunidades(resposta.data.allCommunities)
-			setNComunidades(resposta.data._allCommunitiesMeta.count)
-		})
+			.then((response) => response.json())
+			.then((resposta) => {
+				setComunidades(resposta.data.allCommunities)
+				setNComunidades(resposta.data._allCommunitiesMeta.count)
+			})
 	}, []);
 
 	return (
@@ -123,8 +123,8 @@ export default function Home(props) {
 				</div>
 				<div className="profileRelationsArea" style={{ gridArea: 'profileRelationsArea' }}>
 					<Repositorios usuario={usuario} public_repos={props.public_repos} />
-					<RelationRightSide title={"Comunidades"} items={comunidades} count={nComunidades}/>
-					<RelationRightSide title={"Amigos"} items={followers} count={props.nFollowers}/>
+					<RelationRightSide title={"Comunidades"} items={comunidades} count={nComunidades} />
+					<RelationRightSide title={"Amigos"} items={followers} count={props.nFollowers} />
 				</div>
 			</MainGrid>
 		</>
@@ -133,7 +133,7 @@ export default function Home(props) {
 
 export async function getServerSideProps(context) {
 	const cookies = nookies.get(context);
-	if(!isEmpty(cookies)){
+	if (!isEmpty(cookies)) {
 		const USER = JSON.parse(cookies.USER);
 		if (!USER.login) {
 			return {
